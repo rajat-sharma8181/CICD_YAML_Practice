@@ -13,3 +13,8 @@ provider "azurerm" {
   }
   subscription_id = "be8c30ad-e8da-4b18-bdac-c4b755dd2d80"
 }
+
+resource "azurerm_resorce_group" "rg1" {
+    name = "rg_preprod"
+    location = "east us"
+}
