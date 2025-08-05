@@ -1,0 +1,25 @@
+
+trigger: none
+
+pool: chaukidar
+
+steps:
+- task: TerraformInstaller@1
+  displayName: "terraform install ho raha"
+  inputs:
+    terraformVersion: 'latest'
+
+- task: TerraformTask@5
+  displayName: "terraform init chal raha hai"
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'CICD_service'
+    backendAzureRmStorageAccountName: 'rajatstg'
+    backendAzureRmContainerName: 'rajcontainer'
+    backendAzureRmKey: 'raj.tfstate'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
