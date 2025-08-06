@@ -3,7 +3,9 @@ trigger: none
 pool: chaukidar
 
 variables:
-  az_service: 'CICD_service'
+  subscrip: 5e4fafbb-ef69-4e17-8835-68030d81f758
+  az_service: CICD_service
+
 
 steps:
 - task: TerraformInstaller@1
@@ -17,9 +19,9 @@ steps:
     provider: 'azurerm'
     command: 'init'
     backendServiceArm: '$(az_service)'
-    backendAzureRmStorageAccountName: 'rajatstg'
-    backendAzureRmContainerName: 'rajcontainer'
-    backendAzureRmKey: 'raj.tfstate'
+    backendAzureRmStorageAccountName: rajatstg
+    backendAzureRmContainerName: rajcontainer
+    backendAzureRmKey: raj.tfstate
 
 - task: TerraformTask@5
   displayName: 'terraform validate'
@@ -33,12 +35,11 @@ steps:
     provider: 'azurerm'
     command: 'plan'
     environmentServiceNameAzureRM: '$(az_service)'
-    environmentAzureRmOverrideSubscriptionID: '5e4fafbb-ef69-4e17-8835-68030d81f758'
-
+    environmentAzureRmOverrideSubscriptionID: '$(subscrip)'
 - task: TerraformTask@5
   displayName: 'terraform apply'
   inputs:
     provider: 'azurerm'
     command: 'apply'
-    environmentServiceNameAzureRM: 'CICD_service'
-    environmentAzureRmOverrideSubscriptionID: '5e4fafbb-ef69-4e17-8835-68030d81f758'
+    environmentServiceNameAzureRM: '$(az_service)'
+    environmentAzureRmOverrideSubscriptionID: '$(subscrip)'
