@@ -22,13 +22,23 @@ steps:
     backendAzureRmKey: 'raj.tfstate'
 
 - task: TerraformTask@5
+  displayName: 'terraform validate'
   inputs:
     provider: 'azurerm'
     command: 'validate'
 
 - task: TerraformTask@5
+  displayName: 'terraform plan'
   inputs:
     provider: 'azurerm'
     command: 'plan'
     environmentServiceNameAzureRM: '$(az_service)'
+    environmentAzureRmOverrideSubscriptionID: '5e4fafbb-ef69-4e17-8835-68030d81f758'
+
+- task: TerraformTask@5
+  displayName: 'terraform apply'
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'CICD_service'
     environmentAzureRmOverrideSubscriptionID: '5e4fafbb-ef69-4e17-8835-68030d81f758'
