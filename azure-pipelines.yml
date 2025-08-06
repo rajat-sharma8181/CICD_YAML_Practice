@@ -2,6 +2,9 @@ trigger: none
 
 pool: chaukidar
 
+variables:
+  az_service: 'CICD_service'
+
 steps:
 - task: TerraformInstaller@1
   displayName: "terraform install ho raha"
@@ -13,7 +16,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    backendServiceArm: 'CICD_service'
+    backendServiceArm: '$(az_service)'
     backendAzureRmStorageAccountName: 'rajatstg'
     backendAzureRmContainerName: 'rajcontainer'
     backendAzureRmKey: 'raj.tfstate'
@@ -27,5 +30,5 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    environmentServiceNameAzureRM: 'CICD_service'
+    environmentServiceNameAzureRM: '$(az_service)'
     environmentAzureRmOverrideSubscriptionID: '5e4fafbb-ef69-4e17-8835-68030d81f758'
