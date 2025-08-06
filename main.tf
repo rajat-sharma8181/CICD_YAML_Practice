@@ -16,3 +16,8 @@ resource "azurerm_resource_group" "rg" {
 name = "CICD_rg"
 location = "central india"
 }
+
+resource "azurerm_resource_group" "rg2" {
+name = "CICD_rg2"
+location = "central india"
+}
