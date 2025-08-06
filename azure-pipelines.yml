@@ -18,3 +18,13 @@ steps:
     backendAzureRmContainerName: 'rajcontainer'
     backendAzureRmKey: 'raj.tfstate'
 
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'CICD_service'
