@@ -19,7 +19,7 @@ resource "azurerm_resource_group" "rg3" {
 }
 
 resource "azurerm_storage_account" "stg"{
-  name = "rajstg"
+  name = "rajstg123"
   location = azurerm_resource_group.rg3.location
   resource_group_name = azurerm_resource_group.rg3.name
   account_tier = "Standard"
