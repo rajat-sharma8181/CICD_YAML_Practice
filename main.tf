@@ -1,4 +1,5 @@
 terraform {
+backend "azurerm" {}
     required_providers {
       azurerm = {
         source = "hashicorp/azurerm"
@@ -12,7 +13,15 @@ provider "azurerm" {
   subscription_id = "5e4fafbb-ef69-4e17-8835-68030d81f758"
 }
 
-resource "azurerm_resource_group" "rg2" {
-name = "CICD_rg2"
-location = "central india"
+resource "azurerm_resource_group" "rg3" {
+  name = "CICD_rg3"
+  location = "central india"
+}
+
+resource "azurerm_storage_account" "stg"{
+  name = rajstg
+  location = azurerm_resource_group.rg2.location
+  resource_group_name = azurerm_resource_group.rg2.name
+  account_tier = "Standard"
+  account_replication_type = "LRS"
 }
